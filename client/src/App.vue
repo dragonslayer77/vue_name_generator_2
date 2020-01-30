@@ -5,17 +5,20 @@ import "font-awesome/css/font-awesome.css";
 import axios from "axios/dist/axios";
 import List from "./components/List";
 import Domain from "./components/Domain";
+import ChangeTitleInput from "./components/ChangeTitleInput";
 
 export default {
   name: "app",
   components: {
     List,
-    Domain
+    Domain,
+    ChangeTitleInput
   },
   data: function() {
     return {
       prefixes: [],
-      sufixes: []
+      sufixes: [],
+      title: 'Name Generator'
     };
   },
   methods: {
@@ -51,6 +54,9 @@ export default {
     },
     deleteSufix(sufix) {
       this.sufixes.splice(this.sufixes.indexOf(sufix), 1);
+    },
+    setTitle(msg) {
+      this.title = msg;
     }
   },
   computed: {
@@ -104,9 +110,10 @@ export default {
 <template>
   <div>
     <div id="slogan" class="text-center">
-      <h1>Name Generator</h1>
+      <h1>{{title}}</h1>
       <br />
       <h6 class="text-secondary">Name generator made in Vue.js</h6>
+      <ChangeTitleInput @changeTitle="setTitle" />
     </div>
     <div id="main">
       <div class="container">
